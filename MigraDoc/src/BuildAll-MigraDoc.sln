@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "!PDFsharp", "!PDFsharp", "{603BA43F-715B-471B-897B-871FD0EC35A8}"
 EndProject
@@ -33,6 +33,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigraDoc.RtfRendering-wpf", "MigraDoc.RtfRendering-wpf\MigraDoc.RtfRendering-wpf.csproj", "{00416AAB-3EEE-44A2-923B-86782560CE00}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MigraDoc.RtfRendering-gdi", "MigraDoc.RtfRendering-gdi\MigraDoc.RtfRendering-gdi.csproj", "{22010032-52DC-464D-B8BB-6CD9BF230D1F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PdfSharp.Xps", "..\..\PDFsharp\src\PdfSharp.Xps\PdfSharp.Xps.csproj", "{0BC3964B-A3BC-49D5-9B7C-463299B5A166}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -258,6 +260,26 @@ Global
 		{22010032-52DC-464D-B8BB-6CD9BF230D1F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{22010032-52DC-464D-B8BB-6CD9BF230D1F}.Release|Win32.ActiveCfg = Release|Any CPU
 		{22010032-52DC-464D-B8BB-6CD9BF230D1F}.Release|x86.ActiveCfg = Release|Any CPU
+		{0BC3964B-A3BC-49D5-9B7C-463299B5A166}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BC3964B-A3BC-49D5-9B7C-463299B5A166}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BC3964B-A3BC-49D5-9B7C-463299B5A166}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{0BC3964B-A3BC-49D5-9B7C-463299B5A166}.Debug|ARM.Build.0 = Debug|Any CPU
+		{0BC3964B-A3BC-49D5-9B7C-463299B5A166}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{0BC3964B-A3BC-49D5-9B7C-463299B5A166}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{0BC3964B-A3BC-49D5-9B7C-463299B5A166}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{0BC3964B-A3BC-49D5-9B7C-463299B5A166}.Debug|Win32.Build.0 = Debug|Any CPU
+		{0BC3964B-A3BC-49D5-9B7C-463299B5A166}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0BC3964B-A3BC-49D5-9B7C-463299B5A166}.Debug|x86.Build.0 = Debug|Any CPU
+		{0BC3964B-A3BC-49D5-9B7C-463299B5A166}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BC3964B-A3BC-49D5-9B7C-463299B5A166}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BC3964B-A3BC-49D5-9B7C-463299B5A166}.Release|ARM.ActiveCfg = Release|Any CPU
+		{0BC3964B-A3BC-49D5-9B7C-463299B5A166}.Release|ARM.Build.0 = Release|Any CPU
+		{0BC3964B-A3BC-49D5-9B7C-463299B5A166}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{0BC3964B-A3BC-49D5-9B7C-463299B5A166}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{0BC3964B-A3BC-49D5-9B7C-463299B5A166}.Release|Win32.ActiveCfg = Release|Any CPU
+		{0BC3964B-A3BC-49D5-9B7C-463299B5A166}.Release|Win32.Build.0 = Release|Any CPU
+		{0BC3964B-A3BC-49D5-9B7C-463299B5A166}.Release|x86.ActiveCfg = Release|Any CPU
+		{0BC3964B-A3BC-49D5-9B7C-463299B5A166}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -269,5 +291,9 @@ Global
 		{5A6055BC-BF86-4FDD-9F62-0109DB7A303B} = {603BA43F-715B-471B-897B-871FD0EC35A8}
 		{6F98A822-41B0-4C7A-85A6-E95C1D3E88EF} = {603BA43F-715B-471B-897B-871FD0EC35A8}
 		{CFDB7D46-EA8D-47DE-B10A-9E755A1B48BA} = {603BA43F-715B-471B-897B-871FD0EC35A8}
+		{0BC3964B-A3BC-49D5-9B7C-463299B5A166} = {603BA43F-715B-471B-897B-871FD0EC35A8}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EF8E20A5-C32C-4CFB-8E47-83C669986C13}
 	EndGlobalSection
 EndGlobal

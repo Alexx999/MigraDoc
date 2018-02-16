@@ -98,6 +98,10 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\PDFsharp\src\PdfSharp.Xps\PdfSharp.Xps.csproj">
+      <Project>{0bc3964b-a3bc-49d5-9b7c-463299b5a166}</Project>
+      <Name>PdfSharp.Xps</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MigraDoc.DocumentObjectModel-gdi\MigraDoc.DocumentObjectModel-gdi.csproj">
       <Project>{4666abf3-efe5-49bd-b2e8-9e04f5949145}</Project>
       <Name>MigraDoc.DocumentObjectModel-gdi</Name>
@@ -319,6 +323,9 @@
     </Compile>
     <Compile Include="..\MigraDoc.Rendering\Rendering\TopDownFormatter.cs">
       <Link>Rendering\TopDownFormatter.cs</Link>
+    </Compile>
+    <Compile Include="..\MigraDoc.Rendering\Rendering\XpsRenderer.cs">
+      <Link>Rendering\XpsRenderer.cs</Link>
     </Compile>
     <Compile Include="Rendering.Forms\DocumentPreview.cs">
       <SubType>UserControl</SubType>

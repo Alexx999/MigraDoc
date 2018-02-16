@@ -118,11 +118,16 @@
     <Compile Include="Rendering\TextFrameRenderer.cs" />
     <Compile Include="Rendering\TextFrameRenderInfo.cs" />
     <Compile Include="Rendering\TopDownFormatter.cs" />
+    <Compile Include="Rendering\XpsRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\PDFsharp\src\PdfSharp.Charting\PdfSharp.Charting.csproj">
       <Project>{6f98a822-41b0-4c7a-85a6-e95c1d3e88ef}</Project>
       <Name>PdfSharp.Charting</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\PDFsharp\src\PdfSharp.Xps\PdfSharp.Xps.csproj">
+      <Project>{0bc3964b-a3bc-49d5-9b7c-463299b5a166}</Project>
+      <Name>PdfSharp.Xps</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\..\PDFsharp\src\PdfSharp\PdfSharp.csproj">
       <Project>{5a6055bc-bf86-4fdd-9f62-0109db7a303b}</Project>

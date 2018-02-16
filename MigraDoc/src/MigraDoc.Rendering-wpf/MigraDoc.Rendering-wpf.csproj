@@ -316,6 +316,9 @@
     <Compile Include="..\MigraDoc.Rendering\Rendering\TopDownFormatter.cs">
       <Link>Rendering\TopDownFormatter.cs</Link>
     </Compile>
+    <Compile Include="..\MigraDoc.Rendering\Rendering\XpsRenderer.cs">
+      <Link>Rendering\XpsRenderer.cs</Link>
+    </Compile>
     <Compile Include="Rendering.Windows\DocumentPreview.xaml.cs">
       <DependentUpon>DocumentPreview.xaml</DependentUpon>
     </Compile>
@@ -340,6 +343,10 @@
     <ProjectReference Include="..\..\..\PDFsharp\src\PdfSharp.Charting-wpf\PdfSharp.Charting-wpf.csproj">
       <Project>{e6a2734e-0cd6-4210-8aec-47ee348f8d78}</Project>
       <Name>PdfSharp.Charting-wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\PDFsharp\src\PdfSharp.Xps\PdfSharp.Xps.csproj">
+      <Project>{0bc3964b-a3bc-49d5-9b7c-463299b5a166}</Project>
+      <Name>PdfSharp.Xps</Name>
     </ProjectReference>
     <ProjectReference Include="..\MigraDoc.DocumentObjectModel-wpf\MigraDoc.DocumentObjectModel-wpf.csproj">
       <Project>{769E6587-72F9-475C-9422-D43ACD4C7AC1}</Project>
