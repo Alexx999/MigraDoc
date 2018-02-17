@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
+using System.IO;
 using MigraDoc.DocumentObjectModel.Shapes;
 using MigraDoc.Rendering.Resources;
 using PdfSharp.Drawing;
@@ -13,37 +13,58 @@ namespace MigraDoc.Rendering
     class XpsRenderer : ShapeRenderer
     {
         private readonly Image _image;
+        private readonly Dictionary<string, XpsDocument> _xpsCache;
         private ImageFailure _failure;
         private string _imageFilePath;
+        private int _index;
 
-        internal XpsRenderer(XGraphics gfx, Image image, FieldInfos fieldInfos)
+        internal XpsRenderer(XGraphics gfx, Image image, FieldInfos fieldInfos,
+            Dictionary<string, XpsDocument> xpsCache)
             : base(gfx, image, fieldInfos)
         {
             _image = image;
+            _xpsCache = xpsCache;
             ImageRenderInfo renderInfo = new ImageRenderInfo();
             renderInfo.DocumentObject = _shape;
             _renderInfo = renderInfo;
         }
 
-        internal XpsRenderer(XGraphics gfx, RenderInfo renderInfo, FieldInfos fieldInfos)
+        internal XpsRenderer(XGraphics gfx, RenderInfo renderInfo, FieldInfos fieldInfos,
+            Dictionary<string, XpsDocument> xpsCache)
             : base(gfx, renderInfo, fieldInfos)
         {
+            _xpsCache = xpsCache;
             _image = (Image)renderInfo.DocumentObject;
+        }
+
+        internal string GetFileName(string fullPath, out int index)
+        {
+            index = 0;
+            var split = fullPath.LastIndexOf(".xps:", StringComparison.Ordinal);
+            if (split != -1)
+            {
+                var indexStr = fullPath.Substring(split + 5);
+                int.TryParse(indexStr, out index);
+                return fullPath.Substring(0, split + 4);
+            }
+
+            return fullPath;
         }
 
         internal override void Format(Area area, FormatInfo previousFormatInfo)
         {
-            _imageFilePath = _image.GetFilePath(_documentRenderer.WorkingDirectory);
+            var fullPath = _image.GetFilePath(_documentRenderer.WorkingDirectory);
+            _imageFilePath = GetFileName(fullPath, out _index);
             // The Image is stored in the string if path starts with "base64:", otherwise we check whether the file exists.
             if (!_imageFilePath.StartsWith("base64:") &&
-                !XImage.ExistsFile(_imageFilePath))
+                !File.Exists(_imageFilePath))
             {
                 _failure = ImageFailure.FileNotFound;
                 Debug.WriteLine(Messages2.ImageNotFound(_image.Name), "warning");
             }
             ImageFormatInfo formatInfo = (ImageFormatInfo)_renderInfo.FormatInfo;
             formatInfo.Failure = _failure;
-            formatInfo.ImagePath = _imageFilePath;
+            formatInfo.ImagePath = fullPath;
             CalculateImageDimensions();
             base.Format(area, previousFormatInfo);
         }
@@ -87,10 +108,6 @@ namespace MigraDoc.Rendering
                 catch (Exception)
                 {
                     RenderFailureImage(destRect);
-                }
-                finally
-                {
-                    xImage?.Document.XpsDocument.Close();
                 }
             }
             else
@@ -159,7 +176,7 @@ namespace MigraDoc.Rendering
                 try
                 {
                     //xImage = XImage.FromFile(_imageFilePath);
-                    xImage = GetFixedPage(_imageFilePath);
+                    xImage = GetFixedPage(_imageFilePath, _index);
                 }
                 catch (InvalidOperationException ex)
                 {
@@ -305,10 +322,6 @@ namespace MigraDoc.Rendering
                         Debug.WriteLine(Messages2.ImageNotReadable(_image.Name, ex.Message));
                         formatInfo.Failure = ImageFailure.NotRead;
                     }
-                    finally
-                    {
-                        xImage?.Document.XpsDocument.Close();
-                    }
                 }
             }
             if (formatInfo.Failure != ImageFailure.None)
@@ -327,9 +340,20 @@ namespace MigraDoc.Rendering
 
         private FixedPage GetFixedPage(string xpsFilename)
         {
-            var xpsDocument = XpsDocument.Open(xpsFilename);
+            var fileName = GetFileName(xpsFilename, out var index);
+
+            return GetFixedPage(fileName, index);
+        }
+
+        private FixedPage GetFixedPage(string fileName, int index)
+        {
+            if (!_xpsCache.TryGetValue(fileName, out var xpsDocument))
+            {
+                xpsDocument = XpsDocument.Open(fileName);
+                _xpsCache.Add(fileName, xpsDocument);
+            }
             var fixedDocument = xpsDocument.GetDocument();
-            return fixedDocument.GetFixedPage(0);
+            return fixedDocument.GetFixedPage(index);
         }
     }
 }

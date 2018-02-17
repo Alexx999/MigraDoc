@@ -28,6 +28,7 @@
 // DEALINGS IN THE SOFTWARE.
 #endregion
 
+using System.Text.RegularExpressions;
 using MigraDoc.DocumentObjectModel;
 using PdfSharp.Drawing;
 using MigraDoc.DocumentObjectModel.Tables;
@@ -41,6 +42,8 @@ namespace MigraDoc.Rendering
     /// </summary>
     internal abstract class Renderer
     {
+        private static Regex _xpsCheck = new Regex(".*\\.xps:?[0-9]*$", RegexOptions.Compiled | RegexOptions.Singleline);
+
         /// <summary>
         /// Determines the maximum height a single element may have.
         /// </summary>
@@ -161,9 +164,9 @@ namespace MigraDoc.Rendering
                 renderer = new ChartRenderer(gfx, chart, fieldInfos);
             else if (documentObject is Image image)
             {
-                if (image.Name.EndsWith(".xps"))
+                if (_xpsCheck.IsMatch(image.Name))
                 {
-                    renderer = new XpsRenderer(gfx, image, fieldInfos);
+                    renderer = new XpsRenderer(gfx, image, fieldInfos, documentRenderer.XpsCache);
                 }
                 else
                 {
@@ -203,9 +206,9 @@ namespace MigraDoc.Rendering
             //  renderer = new ChartRenderer(gfx, renderInfo, fieldInfos);
             else if (renderInfo.DocumentObject is Image image)
             {
-                if (image.Name.EndsWith(".xps"))
+                if (_xpsCheck.IsMatch(image.Name))
                 {
-                    renderer = new XpsRenderer(gfx, renderInfo, fieldInfos);
+                    renderer = new XpsRenderer(gfx, renderInfo, fieldInfos, documentRenderer.XpsCache);
                 }
                 else
                 {

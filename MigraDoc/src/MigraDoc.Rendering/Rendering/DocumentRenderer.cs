@@ -37,6 +37,7 @@ using MigraDoc.DocumentObjectModel.Visitors;
 using MigraDoc.DocumentObjectModel.Shapes;
 using MigraDoc.DocumentObjectModel.Tables;
 using MigraDoc.Rendering.Resources;
+using PdfSharp.Xps.XpsModel;
 
 namespace MigraDoc.Rendering
 {
@@ -48,6 +49,8 @@ namespace MigraDoc.Rendering
     /// </remarks>
     public class DocumentRenderer
     {
+        internal Dictionary<string, XpsDocument> XpsCache { get; } = new Dictionary<string, XpsDocument>();
+
         /// <summary>
         /// Initializes a new instance of the DocumentRenderer class.
         /// </summary>
