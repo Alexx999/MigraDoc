@@ -143,6 +143,7 @@ namespace MigraDoc.Rendering
                 _documentRenderer = new DocumentRenderer(_document);
                 _documentRenderer.WorkingDirectory = _workingDirectory;
             }
+            _documentRenderer.InitCache();
             if (prepareCompletely && _documentRenderer.FormattedDocument == null)
             {
                 _documentRenderer.PrepareDocument();
@@ -263,6 +264,8 @@ namespace MigraDoc.Rendering
                     _documentRenderer.RenderPage(gfx, pageNr);
                 }
             }
+            
+            _documentRenderer.CleanCache();
         }
 
         /// <summary>

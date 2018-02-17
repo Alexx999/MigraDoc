@@ -49,7 +49,7 @@ namespace MigraDoc.Rendering
     /// </remarks>
     public class DocumentRenderer
     {
-        internal Dictionary<string, XpsDocument> XpsCache { get; } = new Dictionary<string, XpsDocument>();
+        internal Dictionary<string, XpsDocument> XpsCache { get; private set; }
 
         /// <summary>
         /// Initializes a new instance of the DocumentRenderer class.
@@ -412,5 +412,24 @@ namespace MigraDoc.Rendering
 
         internal int ProgressMaximum;
         internal int ProgressCompleted;
+
+        /// <summary>
+        /// Initializes document cache
+        /// </summary>
+        public void InitCache()
+        {
+            XpsCache = new Dictionary<string, XpsDocument>();
+        }
+
+        /// <summary>
+        /// Cleans document cache
+        /// </summary>
+        public void CleanCache()
+        {
+            foreach (var document in XpsCache.Values)
+            {
+                document.Close();
+            }
+        }
     }
 }
